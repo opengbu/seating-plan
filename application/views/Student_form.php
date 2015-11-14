@@ -28,33 +28,30 @@ function add_prefix(&$item1, $key, $prefix) {
     echo form_open(current_url() . "?" . $_SERVER['QUERY_STRING']);
     ?>
 
-    <label>Program Name</label>
-    <input type="text" class="form-control" name="program" value="<?php echo set_value('program', @$program); ?>" placeholder="Dual Degree Program"/>
-    <br>
+    <label>Roll Number</label>
+    <input type="text" class="form-control" name="roll_no" value="<?php echo set_value('roll_no', @$roll_no); ?>" placeholder="13ics057"/>
 
-    <label>Branch</label>
-    <input type="text" class="form-control" name="branch" value="<?php echo set_value('branch', @$branch); ?>" placeholder="CSE"/>
-    <br>
+    <label><font color="red">Note: You can perform a bulk insert of a range in this format - "</font>13ics 001 057<font color="red">"</font></label>
+    <br />
+    (The 2 spaces between parameters <b>13ics 001 057</b> are important)
+    <br /><br />
 
+    <label>Program</label><br />
     <?php
-//    echo form_dropdown('sc_name', $schools, set_value('sc_name', @$sc_name), 'class="selectpicker"');
+    $programs;
+    $programs_q = $this->db->query("select id,program,branch,semester from program_details");
+    foreach ($programs_q->result() as $row) {
+        $programs[$row->id] = $row->branch . ' ( ' . $row->semester . ' ) ' . $row->program;
+    }
+    echo form_dropdown('program_id', $programs, set_value('program_id', @$program_id), 'class="selectpicker" data-width="100%" data-live-search="true"');
     ?>
-
-    <label>Semester</label>
-    <input type="text" class="form-control" name="semester" value="<?php echo set_value('semester', @$semester); ?>" placeholder="5"/>
-    <br>
-
-    <label>Subjects</label>
-    <input type="text" class="form-control" name="subjects" value="<?php echo set_value('subjects', @$subjects); ?>" placeholder="CY101 MA101 CE101 CS101 EC101 HU101 SS101"/>
-
+    <br /><br />
     <?php
-    echo '<br /><label><font color="red">' . validation_errors() . '</font></label><br>';
+    echo '<label><font color="red">' . validation_errors() . '</font></label><br>';
     ?>
-    <br>
     <div><input type="submit" value="Save / Update" class="btn btn-primary"/></div>
-
-    <?php
-    echo form_close();
-    ?>
+        <?php
+        echo form_close();
+        ?>
 
 </div>

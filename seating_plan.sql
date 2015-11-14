@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2015 at 10:05 AM
+-- Generation Time: Nov 14, 2015 at 01:23 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `time` time NOT NULL,
   `action` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `logs`
@@ -72,7 +72,15 @@ INSERT INTO `logs` (`id`, `user_id`, `date`, `time`, `action`) VALUES
 (30, 1, '2015-11-14', '14:34:01', 'Updated room NumberIL 202'''' (1)'),
 (31, 1, '2015-11-14', '14:34:10', 'Updated room NumberIL 202 " " (1)'),
 (32, 1, '2015-11-14', '14:34:20', 'Updated room NumberIL 202 111~~~!@ (1)'),
-(33, 1, '2015-11-14', '14:34:29', 'Updated room NumberIL 202 111 (1)');
+(33, 1, '2015-11-14', '14:34:29', 'Updated room NumberIL 202 111 (1)'),
+(34, 1, '2015-11-14', '16:09:12', '::1 - Deleted student  (1)'),
+(35, 1, '2015-11-14', '17:36:58', 'Created roll number - 13ics057'),
+(36, 1, '2015-11-14', '17:49:06', 'Created roll numbers Range - 13ics 001 057'),
+(37, 1, '2015-11-14', '17:49:20', 'Updated Roll Number13ics001 (3)'),
+(38, 1, '2015-11-14', '17:49:30', 'Updated Roll Number13ics001 (3)'),
+(39, 1, '2015-11-14', '17:50:04', 'Created roll numbers Range - 12ics 008 45'),
+(40, 1, '2015-11-14', '17:50:45', 'Created roll number - 13ics001'),
+(41, 1, '2015-11-14', '17:51:47', 'Created roll numbers Range - 13ics 006 010');
 
 -- --------------------------------------------------------
 
@@ -202,7 +210,19 @@ CREATE TABLE IF NOT EXISTS `student_details` (
   `roll_no` varchar(30) NOT NULL,
   `program_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `student_details`
+--
+
+INSERT INTO `student_details` (`id`, `roll_no`, `program_id`) VALUES
+(1, '13ics001', 1),
+(2, '13ics006', 1),
+(3, '13ics007', 1),
+(4, '13ics008', 1),
+(5, '13ics009', 1),
+(6, '13ics010', 1);
 
 -- --------------------------------------------------------
 

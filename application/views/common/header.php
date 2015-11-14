@@ -181,6 +181,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li ><a href="<?php echo base_url() . 'Rooms' ?>">Rooms <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
                             <li ><a href="<?php echo base_url() . 'Rooms/CreateOrUpdate' ?>">New Room <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
 
+                            <li ><a href="<?php echo base_url() . 'Students' ?>">Students <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
+                            <li ><a href="<?php echo base_url() . 'Students/CreateOrUpdate' ?>">New Student <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
 
                             <li ><a href="<?php echo base_url() . 'User_controls' ?>">Users <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
                             <li ><a href="<?php echo base_url() . 'User_controls/CreateOrUpdate' ?>">New user <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
@@ -193,4 +195,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </nav>
             <div id="page-content-wrapper" class="container-fluid" >
-       
