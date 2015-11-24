@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <html>
     <head>
-        <title>Login to GBU Online</title>
+        <title>Login to Seating Plan | GBU</title>
         <link rel="shortcut icon" href="<?php echo $this->cdn->base() . '/resources/images/favicon.ico' ?>">
         <link rel="stylesheet" href="<?php echo $this->cdn->users() . 'application/views/common/' . 'css/bootstrap.min.css' ?>">
         <link rel="stylesheet" href="<?php echo $this->cdn->users() . 'application/views/common/' . 'css/varun.css' ?>">
@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="panel panel-default">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title"><div class="text-center"> Sign in to GBU Online</div></h3>
+                            <h3 class="panel-title"><div class="text-center"> Sign in GBU Seating Plan</div></h3>
                         </div>
                         <div class="panel-body">
                             <center>
@@ -65,10 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div><input type="submit" value="Login" class="btn btn-lg btn-primary btn-block"/></div>
 
                             </form>
-                            <a class="btn btn-success btn-lg btn-block" href="<?= base_url('register') ?>" > Sign Up </a>
-                            <br />
-                            <a class="btn btn-warning btn-lg btn-block" href="<?= base_url('Reset_password') ?>" >Account Recovery</a>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>

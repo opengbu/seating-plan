@@ -5,9 +5,9 @@
  */
 $burl = base_url();
 $burl_no_port = parse_url($burl, PHP_URL_HOST) . parse_url($burl, PHP_URL_PATH);
-if( dirname($burl_no_port) != '.') $burl_no_port = dirname($burl_no_port) . '/';
+if (dirname($burl_no_port) != '.')
+    $burl_no_port = dirname($burl_no_port) . '/';
 $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,10 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
             .navbar-nav.navbar-right:last-child {
                 margin-right: 0;
             }
+            .navbar {
+                border-color: rgba(34,34,34,.05);
+                background-color: #9932CC;
+            }
             .caret-up {
                 width: 0; 
                 height: 0; 
@@ -58,7 +62,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
         </style>
 
     </head>
-    <body style="background-image: url(<?php echo base_url('application/views/common/bg_2.jpg') ?>); background-attachment: fixed; background-repeat: no-repeat;background-size:cover;">
+    <body style="background-image: url(<?php echo base_url('application/views/common/bg_2.jpg') ?>); background-attachment: fixed; background-repeat: repeat;">
 
         <nav id="mainNav" class="navbar navbar-fixed-top navbar-default nav navbar-custom" role="navigation">
             <div class="navbar-header">
@@ -76,7 +80,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="<?= base_url() ?>">Central Computer Center</a>
+                <a class="navbar-brand" href="<?= base_url() ?>">Seating Plan</a>
 
             </div> 
             <div id="navbar" class="navbar-collapse collapse">
@@ -86,11 +90,9 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li> 
-                        <a href="http://<?= $burl_with_port . 'login/' ?>">Network Team Login</a>                    
-                    </li>
+
                     <li>
-                        <a href="http://<?= $burl_no_port . 'login/' ?>">IT Support Team Login</a>
+                        <a class="page-scroll" href ="<?= base_url('/login') ?>">Examination Login</a>
                     </li>
                 </ul>
             </div>

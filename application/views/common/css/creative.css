@@ -119,7 +119,7 @@ aside {
 
 .navbar-default .nav > li.active>a:hover,
 .navbar-default .nav>li.active>a:focus:hover {
-    background-color: transparent;
+   background-color: transparent;
 }
 
 @media(min-width:768px) {

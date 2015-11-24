@@ -112,7 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="<?=base_url() ?>">GBU Seating Plan</a>
+                    <a class="navbar-brand" href="<?= base_url() ?>">GBU Seating Plan</a>
 
                 </div> 
                 <div id="navbar" class="navbar-collapse collapse">
@@ -123,18 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <i class="icon-th-large"></i> New
                                 <b class="caret"></b>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?= base_url() . 'events/CreateOrUpdate' ?>">Event</a></li>
-                                <li><a href="<?= base_url() . 'schools/CreateOrUpdate' ?>">School</a></li>
-                                <li><a href="<?= base_url() . 'clubs/CreateOrUpdate' ?>">Club</a></li>
-                                <li><a href="<?= base_url() . 'notices/CreateOrUpdate' ?>">Notice</a></li>
-                                <li><a href="<?= base_url() . 'ebooks/CreateOrUpdate' ?>">Ebook</a></li>
-                                <li><a href="<?= base_url() . 'exams/CreateOrUpdate' ?>">Exam</a></li>
 
-                                <?php if ($this->permissions->get_level() >= 4) { ?>
-                                    <li><a href="<?= base_url() . 'User_controls/CreateOrUpdate' ?>">User</a></li>
-                                <?php } ?>
-                            </ul>
                         </li>
                     </ul>
 
@@ -183,6 +172,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             <li ><a href="<?php echo base_url() . 'Students' ?>">Students <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
                             <li ><a href="<?php echo base_url() . 'Students/CreateOrUpdate' ?>">New Student <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
+
+                            <li ><a href="<?php echo base_url() . 'Exams' ?>">Exams <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
+                            <li ><a href="<?php echo base_url() . 'Exams/CreateOrUpdate' ?>">New Exam <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
 
                             <li ><a href="<?php echo base_url() . 'User_controls' ?>">Users <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-users fa-2x"></i></a></li>
                             <li ><a href="<?php echo base_url() . 'User_controls/CreateOrUpdate' ?>">New user <i style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-user-plus fa-2x"></i></a></li>
