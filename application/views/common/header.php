@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php
             echo ucfirst(str_replace('_', ' ', $this->router->fetch_class()));
             ?>
-            | GBU Online
+            | GBU Seating Plan
         </title>
         <link rel="shortcut icon" href="<?php echo $this->cdn->base() . '/resources/images/favicon.ico' ?>">
 
@@ -112,7 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="<?= dirname(base_url()) ?>">GBU Online</a>
+                    <a class="navbar-brand" href="<?=base_url() ?>">GBU Seating Plan</a>
 
                 </div> 
                 <div id="navbar" class="navbar-collapse collapse">
