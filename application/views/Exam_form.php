@@ -61,9 +61,10 @@ echo '</select> \\ \n';
 echo '</div><div class="col-sm-6" id="sub_';
 ?>' + $i + '"></div></div><br />';
         $(".pg_sub").append(data);
+        add_sub(<?= $beg_id ?>, $i);
+
         $('.selectpicker').selectpicker('refresh');
 
-        add_sub(<?= $beg_id ?>, $i);
     }
 
     $ri = 0;

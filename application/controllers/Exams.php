@@ -102,9 +102,17 @@ class room {
 
 function push_students(&$rooms, $students, $sub) {
     $i = 0;
+    $rlen = count($rooms);
+    echo $rlen. ' ';
     foreach ($students as $student) {
         $bool = 0;
         while ($bool != 1) {
+            if($i >= $rlen)
+            {
+                echo "Error: (Student Overflow): Students are more than rooms. <br />" . $i;
+                print_r($rooms);
+                die();
+            }
             $room = $rooms[$i]; // we only go to next room when it fails
             $pos = $room->get_odd_even($sub);
             if ($room->insert($student, $pos, $sub) == 1) {
@@ -118,13 +126,22 @@ function push_students(&$rooms, $students, $sub) {
 
 class Exams extends CI_Controller {
 
+    function List_schedules() {
+        $this->load->view('common/header_2', $data);
+
+        $this->load->view('List_schedules', $data);
+        $this->load->view('common/footer_2', $data);
+    }
+    
     function print_data() {
         $query = $this->db->get_where('exams', array('id' => $this->input->get('exam_id')));
         $row = $query->row();
         $data['rooms'] = unserialize($row->arrangement_data);
 
-        $this->load->view('Display_exam', $data);
+        $this->load->view('common/header_2', $data);
 
+        $this->load->view('Display_exam', $data);
+        $this->load->view('common/footer_2', $data);
     }
 
     function index() {
@@ -224,6 +241,11 @@ class Exams extends CI_Controller {
                 'arrangement_data' => serialize($room_arr),
             );
             if ($this->input->get('exam_id') != "") { // update
+                if (strlen($room_ids) == 0 || strlen($pg_sub_ids) == 0) {
+                    unset($form_data['pg_sub_ids']);
+                    unset($form_data['room_ids']);
+                    unset($form_data['arrangement_ids']);
+                }
                 $this->db->update('exams', $form_data, " id = '" . $this->input->get('exam_id') . "'");
                 $this->logger->insert('Updated exam - ' . $this->input->post('branch') . ' (' . $this->input->post('branch') . ') -' . $this->input->post('exam') . ' (' . $this->input->get('exam_id') . ')');
             } else {

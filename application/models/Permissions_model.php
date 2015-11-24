@@ -15,9 +15,14 @@ class Permissions_model extends CI_Model {
                 'Register',
                 'Logout',
                 'Upgrade',
-                'Reset_password'
+                'Reset_password',
+                'Landing',
             );
-            if (!in_array(ucfirst($this->router->fetch_class()), $allowed)) {
+            $allowed_methods = array(
+                'Print_data',
+            );
+
+            if (!in_array(ucfirst($this->router->fetch_class()), $allowed) && !in_array($this->router->fetch_method(), $allowed_methods)) {
                 redirect('login' . "?redirect=" . current_url() . $_SERVER['QUERY_STRING']);
                 die();
             }
