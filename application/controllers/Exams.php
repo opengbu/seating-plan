@@ -103,12 +103,11 @@ class room {
 function push_students(&$rooms, $students, $sub) {
     $i = 0;
     $rlen = count($rooms);
-    echo $rlen. ' ';
+    echo $rlen . ' ';
     foreach ($students as $student) {
         $bool = 0;
         while ($bool != 1) {
-            if($i >= $rlen)
-            {
+            if ($i >= $rlen) {
                 echo "Error: (Student Overflow): Students are more than rooms. <br />" . $i;
                 print_r($rooms);
                 die();
@@ -132,7 +131,7 @@ class Exams extends CI_Controller {
         $this->load->view('List_schedules', $data);
         $this->load->view('common/footer_2', $data);
     }
-    
+
     function print_data() {
         $query = $this->db->get_where('exams', array('id' => $this->input->get('exam_id')));
         $row = $query->row();
@@ -141,6 +140,17 @@ class Exams extends CI_Controller {
         $this->load->view('common/header_2', $data);
 
         $this->load->view('Display_exam', $data);
+        $this->load->view('common/footer_2', $data);
+    }
+
+    function pdf_data() {
+        $query = $this->db->get_where('exams', array('id' => $this->input->get('exam_id')));
+        $row = $query->row();
+        $data['rooms'] = unserialize($row->arrangement_data);
+
+        $this->load->view('common/header_2', $data);
+
+        $this->load->view('Exam_excel', $data);
         $this->load->view('common/footer_2', $data);
     }
 
