@@ -66,7 +66,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
         </style>
 
     </head>
-    <body style="background-image: url(<?php echo base_url('application/views/common/bg_2.jpg') ?>); background-attachment: fixed; background-repeat: repeat;">
+    <body style="background-image: url(<?php echo base_url('application/views/common/bg_2.png') ?>); background-attachment: fixed; background-repeat: repeat;">
 
         <nav id="mainNav" class="navbar navbar-fixed-top navbar-default nav navbar-custom" role="navigation">
             <div class="navbar-header">

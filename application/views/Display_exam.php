@@ -3,6 +3,7 @@
     .table
     {
         background-color: #95e594;
+        margin-bottom: 0px;
     }
 </style>
 <div class="container" style="font-family: 'Roboto', sans-serif;">
@@ -59,27 +60,36 @@
     <h2>Room Wise Plan</h2>
     <?php
     foreach ($rooms as $room) {
-        echo '<table class="table table-striped table-hover table-responsive">';
         ?>
-        <thead>
-            <tr>
-                <th><?= $room->room_no ?></th>
-            </tr>
-        </thead>
+        <div class="row text-center" style="    border: 2px solid #73AD21;">
+            <b><?= $room->room_no ?> [<?php
+                foreach ($room->odd_subjects as $odd)
+                    echo $odd . ' ';
+
+                foreach ($room->even_subjects as $even)
+                    echo $even . ' ';
+                ?> ]</b>
+
+            <table class="table table-bordered table-striped  table-responsive">
+
+                <?php
+                for ($i = 1; $i <= $room->rows; $i++) {
+                    echo '<tr >';
+                    for ($j = 1; $j <= $room->coloumns; $j++) {
+                        echo '<td> ';
+                        if ($room->data[$i][$j] != "EMPTY")
+                            echo $room->data[$i][$j];
+                        else
+                            echo '<font color="GREY">BLANK</font>';
+                        echo ' </td>';
+                    }
+                    echo '</tr />';
+                }
+                ?>
+            </table>
+        </div>
+        <br /><br />
         <?php
-        for ($i = 1; $i <= $room->rows; $i++) {
-            echo '<tr >';
-            for ($j = 1; $j <= $room->coloumns; $j++) {
-                echo '<td> ';
-                if ($room->data[$i][$j] != "EMPTY")
-                    echo $room->data[$i][$j];
-                else
-                    echo '<font color="GREY">BLANK</font>';
-                echo ' </td>';
-            }
-            echo '</tr />';
-        }
-        echo '</table><br />';
     }
     ?>
 </div>

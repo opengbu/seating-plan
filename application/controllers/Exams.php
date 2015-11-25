@@ -87,11 +87,13 @@ class room {
 
                 if ($this->data[$i][$j] == "EMPTY") {
                     $this->data[$i][$j] = $roll_no;
-                    if ($pos == "odd")
-                        array_push($this->odd_subjects, $sub);
-                    else
-                        array_push($this->even_subjects, $sub);
-                    return 1;
+                    if ($pos == "odd") {
+                        if (!in_array($this->odd_subjects, $sub))
+                            array_push($this->odd_subjects, $sub);
+                    }else {
+                        if (!in_array($this->even_subjects, $sub))
+                            array_push($this->even_subjects, $sub);
+                    }return 1;
                 }
             }
         }
