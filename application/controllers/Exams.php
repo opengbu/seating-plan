@@ -88,10 +88,10 @@ class room {
                 if ($this->data[$i][$j] == "EMPTY") {
                     $this->data[$i][$j] = $roll_no;
                     if ($pos == "odd") {
-                        if (!in_array($this->odd_subjects, $sub))
+                        if (!in_array( $sub,$this->odd_subjects))
                             array_push($this->odd_subjects, $sub);
                     }else {
-                        if (!in_array($this->even_subjects, $sub))
+                        if (!in_array($sub,$this->even_subjects))
                             array_push($this->even_subjects, $sub);
                     }return 1;
                 }
@@ -117,6 +117,7 @@ function push_students(&$rooms, $students, $sub, &$master) {
     $master_elem = new Master_Element();
     $master_elem->min = $students[0];
     $previousValue = null;
+    $students_per_room = 0;
     foreach ($students as $student) {
         $bool = 0;
         while ($bool != 1) {
@@ -130,23 +131,27 @@ function push_students(&$rooms, $students, $sub, &$master) {
             if ($room->insert($student, $pos, $sub) == 1) {
                 $rooms[$i] = $room; //update our array
                 $bool = 1;
+                $students_per_room ++;
             } else {
-                if ($previousValue != $master_elem->min) { //atleast one student was inserted in that room
+                if ($students_per_room > 0) { //atleast one student was inserted in that room
                     $master_elem->max = $previousValue;
                     $master_elem->sub = $sub;
                     $master_elem->room_no = $room->room_no;
                     array_push($master, $master_elem);
 
+                    unset($master_elem);
+                    $master_elem = new Master_Element();
                     $master_elem->min = $student;
+                    
+                    $students_per_room = 0;
                 }
-
 
                 $i++; //we failed, now next room
             }
         }
         $previousValue = $student;
     }
-    if ($master_elem->min != end($students)) {
+    if ($students_per_room > 0) {
         $room = $rooms[$i];
 
         $master_elem->max = end($students);

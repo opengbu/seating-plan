@@ -61,16 +61,17 @@
     <?php
     foreach ($rooms as $room) {
         ?>
-        <div class="row text-center" style="    border: 2px solid #73AD21;">
-            <b><?= $room->room_no ?> [<?php
-                foreach ($room->odd_subjects as $odd)
-                    echo $odd . ' ';
+        <div class="row text-center" style="    border: 2px solid #73AD21; border-radius: 25px 25px 0px 0px;">
+            <div style="padding-top: 5px">
+                <b><?= $room->room_no ?> [<?php
+                    foreach ($room->odd_subjects as $odd)
+                        echo $odd . ' ';
 
-                foreach ($room->even_subjects as $even)
-                    echo $even . ' ';
-                ?> ]</b>
-
-            <table class="table table-bordered table-striped  table-responsive">
+                    foreach ($room->even_subjects as $even)
+                        echo $even . ' ';
+                    ?> ]</b>
+            </div>
+            <table class="table table-bordered table-striped  table-responsive" style="margin-top: 5px;">
 
                 <?php
                 for ($i = 1; $i <= $room->rows; $i++) {
