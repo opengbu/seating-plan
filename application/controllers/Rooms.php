@@ -98,5 +98,17 @@ class Rooms extends CI_Controller {
 
         redirect(base_url() . 'Rooms/view_all');
     }
+	
+	/**  Created on :Nov 25, 2015, 2:24:49 AM
+ *  Author     :Rishabh Ahuja <rishabhahuja279@gmail.com>*/
+	function upload_sampledata()
+		{
+		$this->load->model('upload_form');
+		$data['result']=$this->upload_form->upload_sampledata_csv();
+		redirect(base_url() . 'Rooms/view_all');
+		
+		
+
+		}
 
 }

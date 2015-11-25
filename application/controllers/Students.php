@@ -103,6 +103,10 @@ class Students extends CI_Controller {
 
         $this->load->view('common/footer');
     }
+	
+	
+	
+	
 
     function view_all() {
 
@@ -124,5 +128,29 @@ class Students extends CI_Controller {
 
         redirect(base_url() . 'Students/view_all');
     }
+	
+	
+	
+	
+	
+	
+	function upload_sampledata()
+		{
+		$this->load->model('upload');
+		$data['result']=$this->upload->upload_sampledata_csv();
+		redirect(base_url() . 'Students/view_all');
+		
+		//$data['query']=$this-> upload_services->get_car_features_info();
+
+		}
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

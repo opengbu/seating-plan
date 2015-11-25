@@ -43,7 +43,25 @@ function add_prefix(&$item1, $key, $prefix) {
 <?php
 echo '<br /><label><font color="red">' . validation_errors() . '</font></label><br>';
 ?>
-    <div><input type="submit" value="Save / Update" class="btn btn-primary"/></div>
+    <div><input type="submit" value="Save / Update" class="btn btn-primary"/></div><br>
 </form>
 
+</div>
+
+<div class="col-sm-10" >
+
+
+
+
+
+
+<form action="<?=site_url('Rooms/upload_sampledata')?>" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+<table>
+<tr>
+<td> Choose your .csv file: </td>
+<td><input type="file" class="" name="userfile" id="userfile"  align="center"/>
+</td>
+</tr></table> 
+<button type="submit" name="submit" class="btn btn-primary"  > Save</button>
+</form>
 </div>

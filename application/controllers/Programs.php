@@ -104,3 +104,16 @@ class Programs extends CI_Controller {
     }
 
 }
+
+/**  Created on :Nov 25, 2015, 2:24:49 AM
+ *  Author     :Rishabh Ahuja <rishabhahuja279@gmail.com>*/
+	function upload_sampledata()
+		{
+		$this->load->model('upload_program');
+		$data['result']=$this->upload_form->upload_sampledata_csv();
+		redirect(base_url() . 'Rooms/view_all');
+		
+		
+
+		}
+
