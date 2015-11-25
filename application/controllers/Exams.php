@@ -100,10 +100,21 @@ class room {
 
 }
 
-function push_students(&$rooms, $students, $sub) {
+class Master_Element {
+
+    var $min;
+    var $max;
+    var $room_no;
+    var $sub;
+
+}
+
+function push_students(&$rooms, $students, $sub, &$master) {
     $i = 0;
     $rlen = count($rooms);
-    echo $rlen . ' ';
+    $master_elem = new Master_Element();
+    $master_elem->min = $students[0];
+    $previousValue = null;
     foreach ($students as $student) {
         $bool = 0;
         while ($bool != 1) {
@@ -117,25 +128,46 @@ function push_students(&$rooms, $students, $sub) {
             if ($room->insert($student, $pos, $sub) == 1) {
                 $rooms[$i] = $room; //update our array
                 $bool = 1;
-            } else
+            } else {
+                if ($previousValue != $master_elem->min) { //atleast one student was inserted in that room
+                    $master_elem->max = $previousValue;
+                    $master_elem->sub = $sub;
+                    $master_elem->room_no = $room->room_no;
+                    array_push($master, $master_elem);
+
+                    $master_elem->min = $student;
+                }
+
+
                 $i++; //we failed, now next room
+            }
         }
+        $previousValue = $student;
+    }
+    if ($master_elem->min != end($students)) {
+        $room = $rooms[$i];
+
+        $master_elem->max = end($students);
+        $master_elem->room_no = $room->room_no;
+        $master_elem->sub = $sub;
+        array_push($master, $master_elem);
     }
 }
 
 class Exams extends CI_Controller {
 
     function List_schedules() {
-        $this->load->view('common/header_2', $data);
+        $this->load->view('common/header_2');
 
-        $this->load->view('List_schedules', $data);
-        $this->load->view('common/footer_2', $data);
+        $this->load->view('List_schedules');
+        $this->load->view('common/footer_2');
     }
 
     function print_data() {
         $query = $this->db->get_where('exams', array('id' => $this->input->get('exam_id')));
         $row = $query->row();
         $data['rooms'] = unserialize($row->arrangement_data);
+        $data['master'] = unserialize($row->master);
 
         $this->load->view('common/header_2', $data);
 
@@ -224,7 +256,7 @@ class Exams extends CI_Controller {
             }
 
 
-
+            $master = array();
 
             $i = 1;
             $pg_sub_ids = '';
@@ -237,7 +269,7 @@ class Exams extends CI_Controller {
                     array_push($student_arr, $row->roll_no);
                 }
 
-                push_students($room_arr, $student_arr, $_POST['subject_' . $i]);
+                push_students($room_arr, $student_arr, $_POST['subject_' . $i], $master);
 
                 $i++;
             }
@@ -249,12 +281,14 @@ class Exams extends CI_Controller {
                 'pg_sub_ids' => $pg_sub_ids,
                 'room_ids' => $room_ids,
                 'arrangement_data' => serialize($room_arr),
+                'master' => serialize($master),
             );
             if ($this->input->get('exam_id') != "") { // update
                 if (strlen($room_ids) == 0 || strlen($pg_sub_ids) == 0) {
                     unset($form_data['pg_sub_ids']);
                     unset($form_data['room_ids']);
                     unset($form_data['arrangement_ids']);
+                    unset($form_data['master']);
                 }
                 $this->db->update('exams', $form_data, " id = '" . $this->input->get('exam_id') . "'");
                 $this->logger->insert('Updated exam - ' . $this->input->post('branch') . ' (' . $this->input->post('branch') . ') -' . $this->input->post('exam') . ' (' . $this->input->get('exam_id') . ')');

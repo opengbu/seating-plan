@@ -17,7 +17,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
         <link rel="shortcut icon" href="<?php echo base_url('application/views/common/favicon.ico') ?>">
 
         <title>
-            Central Computer Center | GBU
+            Seating Plan | GBU
         </title>
         <link rel="stylesheet" href="<?php echo base_url() . 'application/views/common/' . 'dist/css/bootstrap-select.css' ?>">
         <link rel="stylesheet" href="<?php echo base_url() . 'application/views/common/' . 'css/bootstrap.min.css' ?>">
@@ -59,6 +59,10 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
             hr {
                 max-width: 100%;
             }
+            .content {
+                min-height: calc(100vh - 195px);
+                /* 80px header + 40px footer = 120px  */
+            }
         </style>
 
     </head>
@@ -98,4 +102,4 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
             </div>
         </nav>
         <div id="page-content-wrapper" >
-            <div class="container">
+            <div class="container content">

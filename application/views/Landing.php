@@ -98,7 +98,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
                         <h2 class="section-heading">Exam Schedules</h2>
                         <hr class="light">
                         <p class="text-faded">See Your Examination Schedules Here </p>
-                        <a href="<?= base_url('Exams/List_shedules') ?>" class="btn btn-default btn-xl">Schedule List</a><br /><br />
+                        <a href="<?= base_url('Exams/List_schedules') ?>" class="btn btn-default btn-xl">Schedule List</a><br /><br />
                         
                     </div>
                 </div>

@@ -13,7 +13,7 @@
 <aside class="bg-dark" id="about">
     <div class="text-center">
         <div class="call-to-action">
-            <p>Proudly <i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="http://www.github.com/Varun-Garg">Varun Garg</a>.</p>                </div>
+            <p>Proudly <i class="fa fa-code"></i> by <a href="http://www.github.com/Varun-Garg">Varun Garg, <a href="http://www.github.com/Varun-Garg">Rishabh Ahuja</a></a>.</p>                </div>
     </div>
 </aside>
   <script type="text/javascript" src="<?php echo base_url() . 'application/views/common/' . 'js/type-ahead.js' ?>"></script>
