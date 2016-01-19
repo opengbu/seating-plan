@@ -19,14 +19,14 @@
 
  */
 
-class Upload_program extends CI_Model {
+class Upload_rooms extends CI_Model {
 
     function __construct() {
 
         parent::__construct();
     }
 
-    function program_data_csv() {
+    function room_data_csv() {
 
         $fp = fopen($_FILES['userfile']['tmp_name'], 'r') or die("can't open file");
         while ($csv_line = fgetcsv($fp, 1024)) {
@@ -35,21 +35,19 @@ class Upload_program extends CI_Model {
 
                 $insert_csv = array();
                 // $insert_csv['id'] = $csv_line[0];
-                $insert_csv['program'] = $csv_line[0];
-                $insert_csv['branch'] = $csv_line[1];
-                $insert_csv['semester'] = $csv_line[2];
-                $insert_csv['subjects'] = $csv_line[3];
+                $insert_csv['room_no'] = $csv_line[0];
+                $insert_csv['rows'] = $csv_line[1];
+                $insert_csv['columns'] = $csv_line[2];
             }
 
             $data = array(
                 //'id' => $insert_csv['id'],
-                'program' => $insert_csv['program'],
-                'branch' => $insert_csv['branch'],
-                'semester' => $insert_csv['semester'],
-                'subjects' => $insert_csv['subjects']);
+                'room_no' => $insert_csv['room_no'],
+                'rows' => $insert_csv['rows'],
+                'columns' => $insert_csv['columns']);
 
 
-            $data['crane_features'] = $this->db->insert('program_details', $data);
+            $data['crane_features'] = $this->db->insert('rooms', $data);
         }
         fclose($fp) or die("can't close file");
         $data['success'] = "success";

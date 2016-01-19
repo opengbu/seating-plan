@@ -2,7 +2,7 @@
 
 /*
  *  Created on :Nov 25, 2015, 2:24:49 AM
- *  Author     :Rishabh Ahuja <rishabhahuja279@gmail.com>
+ *  Author     :Rishabh ahuja <rishabhahuja279@gmail.com>
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,14 @@
 
  */
 
-class Upload_program extends CI_Model {
+class Upload_students extends CI_Model {
 
     function __construct() {
 
         parent::__construct();
     }
 
-    function program_data_csv() {
+    function student_data_csv() {
 
         $fp = fopen($_FILES['userfile']['tmp_name'], 'r') or die("can't open file");
         while ($csv_line = fgetcsv($fp, 1024)) {
@@ -35,25 +35,26 @@ class Upload_program extends CI_Model {
 
                 $insert_csv = array();
                 // $insert_csv['id'] = $csv_line[0];
-                $insert_csv['program'] = $csv_line[0];
-                $insert_csv['branch'] = $csv_line[1];
-                $insert_csv['semester'] = $csv_line[2];
-                $insert_csv['subjects'] = $csv_line[3];
+                $insert_csv['roll_no'] = $csv_line[0];
+                $insert_csv['program_id'] = $csv_line[1];
             }
 
             $data = array(
                 //'id' => $insert_csv['id'],
-                'program' => $insert_csv['program'],
-                'branch' => $insert_csv['branch'],
-                'semester' => $insert_csv['semester'],
-                'subjects' => $insert_csv['subjects']);
+                'roll_no' => $insert_csv['roll_no'],
+                'program_id' => $insert_csv['program_id']);
 
-
-            $data['crane_features'] = $this->db->insert('program_details', $data);
+            $data['crane_features'] = $this->db->insert('student_details', $data);
         }
         fclose($fp) or die("can't close file");
         $data['success'] = "success";
         return $data;
     }
 
+    /* function get_car_features_info()
+      {
+      $get_cardetails=$this->db->query("select * from student_details");
+      return $get_cardetails;
+
+      } */
 }
