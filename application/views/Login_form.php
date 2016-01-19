@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
         <title>Login to Seating Plan | GBU</title>
-        <link rel="shortcut icon" href="<?php echo $this->cdn->base() . '/resources/images/favicon.ico' ?>">
+        <link rel="shortcut icon" href="<?php echo $this->cdn->users() . '/application/views/common/favicon.ico' ?>">
         <link rel="stylesheet" href="<?php echo $this->cdn->users() . 'application/views/common/' . 'css/bootstrap.min.css' ?>">
         <link rel="stylesheet" href="<?php echo $this->cdn->users() . 'application/views/common/' . 'css/varun.css' ?>">
         <script type="text/javascript" src="<?php echo $this->cdn->users() . 'application/views/common/' . 'js/jquery-2.1.3.min.js' ?>"></script>
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="panel-body">
                             <center>
-                                <img width="50%" src ="<?php echo $this->cdn->base() . '/resources/images/' . '200x200.bmp' ?>" >
+                                <img width="50%" src ="<?php echo $this->cdn->users() . 'application/views/common/' . 'gbu.png' ?>" >
                             </center>
 
                             <br>

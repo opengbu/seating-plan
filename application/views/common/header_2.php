@@ -94,7 +94,9 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
 
                 <ul class="nav navbar-nav navbar-right">
 
-
+			<li>
+		            <a class="page-scroll" href="<?= base_url('Exams/List_schedules') ?>">Exam Schedules</a>
+		        </li>
                     <li>
                         <a class="page-scroll" href ="<?= base_url('/login') ?>">Examination Login</a>
                     </li>
