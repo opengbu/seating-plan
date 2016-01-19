@@ -65,7 +65,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="#schedules">Exam Schedules</a>
+                            <a class="page-scroll" href="<?= base_url('Exams/List_schedules') ?>">Exam Schedules</a>
                         </li>
                           <li>
                             <a class="page-scroll" href ="<?=base_url('/login') ?>">Examination Login</a>
@@ -90,7 +90,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
                 </div>
             </div>
         </header>
-
+<!--
         <section class="bg-primary" id="schedules">
             <div class="container">
                 <div class="row">
@@ -104,7 +104,7 @@ $burl_with_port = parse_url($burl, PHP_URL_HOST) . ':2000/';
                 </div>
             </div>
         </section>
-
+-->
 
 
         <aside class="bg-dark" id="about">
