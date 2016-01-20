@@ -19,7 +19,7 @@ class Permissions_model extends CI_Model {
                 'Landing',
             );
             $allowed_methods = array(
-                'Print_data',
+                'Print_data','List_schedules'
             );
 
             if (!in_array(ucfirst($this->router->fetch_class()), $allowed) && !in_array($this->router->fetch_method(), $allowed_methods)) {

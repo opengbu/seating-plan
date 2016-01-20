@@ -1,4 +1,15 @@
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<?php
+if ($this->input->get('pdf') != null)
+    $pdf_flag = $this->input->get('pdf');
+else
+    $pdf_flag = 0;
+
+if ($pdf_flag == 0) {
+    ?>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <?php
+}
+?>
 <style>
     .table
     {
@@ -6,49 +17,80 @@
         margin-bottom: 0px;
     }
 </style>
-<div class="container" style="font-family: 'Roboto', sans-serif;">
+<div class="container-fluid" style="font-family: 'Roboto', sans-serif;">
 
-    <h2>Master Plan</h2>
-    <ul class="nav nav-list col-sm-12" style="padding-bottom: 1cm;">
+    <?php
+    $query = $this->db->query("select * from exams where id = '" . $this->input->get('exam_id') . "'");
+    $exam_info = $query->row();
+    ?>
+    <div class="row col-sm-12">
+        <div class="pull-left">
+            <h2>Master Plan</h2>
+        </div>
+        <div class="pull-right">
+            <h3><?php
+    echo ucfirst($exam_info->shift) . ' Shift: ' . $exam_info->time . ', ' . $exam_info->date;
+    ?></h3>
+        </div>
+    </div>
+    <ul class = "nav nav-list col-sm-12" style = "padding-bottom: 1cm;">
 
-        <li class="list-group-item">
-            <b><div class="row">
-                    <div class="col-sm-3">
-                        Starting Roll Number
+        <li class = "list-group-item">
+            <b><div class = "row">
+                    <div class = "col-sm-3">
+                        <div class = "text-center">Roll Number </div>
+                        First <div class = "pull-right">Last</div>
                     </div>
 
-                    <div class="col-sm-3">
-                        Last Roll Number
+                    <div class = "col-sm-3">
+                        Batch
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class = "col-sm-2">
                         Subject
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class = "col-sm-2">
                         Room Number
+                    </div>
+
+                    <div class = "col-sm-2">
+                        Number Of Students
                     </div>
                 </div></b>
         </li>
         <?php
         foreach ($master as $element) {
+            $query = $this->db->query('select program_details.* from program_details,student_details where '
+                    . "roll_no = '$element->min' and program_id = program_details.id");
+            $program_data = $query->row();
             ?>
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-3">
                         <?= $element->min; ?>
+
+                        <div class="pull-right">
+                            <?= $element->max; ?>
+                        </div>
                     </div>
 
                     <div class="col-sm-3">
-                        <?= $element->max; ?>
+                        <?php
+                        echo $program_data->branch . ' (' . $program_data->semester . ') - ' . $program_data->program;
+                        ?>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <?= $element->sub; ?>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <?= $element->room_no; ?>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <?= $element->num_students; ?>
                     </div>
                 </div>
             </li>
@@ -64,12 +106,22 @@
         <div class="row text-center" style="    border: 2px solid #73AD21; border-radius: 25px 25px 0px 0px;">
             <div style="padding-top: 5px">
                 <b><?= $room->room_no ?> [<?php
-                    foreach ($room->odd_subjects as $odd)
-                        echo $odd . ' ';
+    foreach ($room->odd_subjects as $odd)
+        echo $odd . ' ';
 
-                    foreach ($room->even_subjects as $even)
-                        echo $even . ' ';
-                    ?> ]</b>
+    foreach ($room->even_subjects as $even)
+        echo $even . ' ';
+        ?> ]</b>
+            </div>
+            <div class="row col-sm-12">
+                <div class="pull-right">
+                    <?php
+                    echo ucfirst($exam_info->shift) . ' Shift: ' . $exam_info->time . ', ' . $exam_info->date;
+                    ?>
+                </div><br />
+            </div>
+            <div class="row col-sm-12">
+                Board Facing Side 
             </div>
             <table class="table table-bordered table-striped  table-responsive" style="margin-top: 5px;">
 

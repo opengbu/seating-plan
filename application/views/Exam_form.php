@@ -23,6 +23,8 @@ function add_prefix(&$item1, $key, $prefix) {
     $item1 = $prefix . $item1;
 }
 ?>
+<script type="text/javascript" src="<?php echo base_url() . 'application/views/common/' . 'js/bootstrap-datepicker.js' ?>"></script>
+<link rel="stylesheet" href="<?php echo base_url() . 'application/views/common/' . 'css/datepicker.css' ?>">
 <script>
     $i = 0;
 
@@ -42,12 +44,13 @@ function add_prefix(&$item1, $key, $prefix) {
     function add_pg_sub()
     {
         $i++;
-        var data = '<?php
+        var data = '<div class="row" id = "pg_sub_' + $i + '"><div class="col-sm-6"> \ \n' +
+                '<?php
 $programs;
 $programs_q = $this->db->query("select id,program,branch,semester from program_details");
 $beg_r = $programs_q->row(0);
 $beg_id = $beg_r->id; //to initalize later
-echo '<div class="row"><div class="col-sm-6"> \\ \n';
+//echo ;
 echo '<select class="selectpicker" onchange="add_sub(this.value,'
 ?>' + $i + ')" name="program_' + $i + '" \
 <?php
@@ -58,8 +61,10 @@ foreach ($programs_q->result() as $row) {
     echo '<option value = "' . $row->id . '">' . $programs[$row->id] . '</option>' . '\\ \n';
 }
 echo '</select> \\ \n';
-echo '</div><div class="col-sm-6" id="sub_';
-?>' + $i + '"></div></div><br />';
+echo '</div><div class="col-sm-3" id="sub_';
+?>' + $i + '"></div>'
+                + '<div class = "btn btn-danger btn-xs" onclick="$(\'#pg_sub_' + $i + '\').remove();"> Remove </div>'
+                + '<br /><br /></div>';
         $(".pg_sub").append(data);
         add_sub(<?= $beg_id ?>, $i);
 
@@ -86,10 +91,18 @@ foreach ($programs_q->result() as $row) {
 }
 echo '</select> \\ \n';
 echo '</div>';
-?>' + '</div><br />';
+?>' + '<br /></div>';
         $(".room_sub").append(data);
         $('.selectpicker').selectpicker('refresh');
     }
+
+    function addParam() {
+        document.getElementsByName('max_programs')[0].value = $i;
+    }
+
+    $('.datepicker').datepicker({
+        autoclose: true
+    });
 </script>
 <div class="col-sm-8" >
     <?php
@@ -97,7 +110,8 @@ echo '</div>';
     ?>
 
     <label>Date</label>
-    <input type="text" class="form-control" name="date" value="<?php echo set_value('date', @$date); ?>" placeholder="YYYY-MM-DD"/>
+    <input type="text" class="form-control" name="date" value="<?php echo set_value('date', @$date); ?>" placeholder="YYYY-MM-DD"
+           data-provide="datepicker" data-date-format="yyyy-mm-dd" class="datepicker form-control"/>
     <br>
 
     <label>Shift</label>
@@ -116,15 +130,19 @@ echo '</div>';
     <br>
 
 
+    <!--
     <div id="room_sub" class="room_sub">
         <b>Rooms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>  
         <input type="button" onclick="add_room()" value="Add Room" class="btn btn-warning btn-xs"/><br /><br />
     </div>
+    -->
 
     <?php
     echo '<br /><label><font color="red">' . validation_errors() . '</font></label><br>';
     ?>
-    <div><input type="submit" value="Save / Update" class="btn btn-primary"/></div>
+
+    <input type='hidden' name='max_programs' />
+    <div><input type="submit" value="Save / Update" class="btn btn-primary" onclick='addParam()' /></div>
 
     <?php
     echo form_close();

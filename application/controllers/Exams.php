@@ -88,10 +88,10 @@ class room {
                 if ($this->data[$i][$j] == "EMPTY") {
                     $this->data[$i][$j] = $roll_no;
                     if ($pos == "odd") {
-                        if (!in_array( $sub,$this->odd_subjects))
+                        if (!in_array($sub, $this->odd_subjects))
                             array_push($this->odd_subjects, $sub);
                     }else {
-                        if (!in_array($sub,$this->even_subjects))
+                        if (!in_array($sub, $this->even_subjects))
                             array_push($this->even_subjects, $sub);
                     }return 1;
                 }
@@ -108,6 +108,7 @@ class Master_Element {
     var $max;
     var $room_no;
     var $sub;
+    var $num_students;
 
 }
 
@@ -115,6 +116,10 @@ function push_students(&$rooms, $students, $sub, &$master) {
     $i = 0;
     $rlen = count($rooms);
     $master_elem = new Master_Element();
+
+    if (!isset($students[0]))
+        return;
+
     $master_elem->min = $students[0];
     $previousValue = null;
     $students_per_room = 0;
@@ -137,12 +142,13 @@ function push_students(&$rooms, $students, $sub, &$master) {
                     $master_elem->max = $previousValue;
                     $master_elem->sub = $sub;
                     $master_elem->room_no = $room->room_no;
+                    $master_elem->num_students = $students_per_room;
                     array_push($master, $master_elem);
 
                     unset($master_elem);
                     $master_elem = new Master_Element();
                     $master_elem->min = $student;
-                    
+
                     $students_per_room = 0;
                 }
 
@@ -157,6 +163,8 @@ function push_students(&$rooms, $students, $sub, &$master) {
         $master_elem->max = end($students);
         $master_elem->room_no = $room->room_no;
         $master_elem->sub = $sub;
+        $master_elem->num_students = $students_per_room;
+
         array_push($master, $master_elem);
     }
 }
@@ -176,10 +184,15 @@ class Exams extends CI_Controller {
         $data['rooms'] = unserialize($row->arrangement_data);
         $data['master'] = unserialize($row->master);
 
-        $this->load->view('common/header_2', $data);
-
-        $this->load->view('Display_exam', $data);
-        $this->load->view('common/footer_2', $data);
+        if ($this->input->get('pdf') == 1) {
+            $this->load->view('common/header_2', $data);
+            $this->load->view('Display_exam', $data);
+            $this->load->view('common/footer_2', $data);
+        } else {
+            $this->load->view('common/header_2', $data);
+            $this->load->view('Display_exam', $data);
+            $this->load->view('common/footer_2', $data);
+        }
     }
 
     function pdf_data() {
@@ -246,28 +259,45 @@ class Exams extends CI_Controller {
         } else {
             $this->load->helper('htmlpurifier');
 
-
             $i = 1;
             $room_ids = '';
             $room_arr = array();
+            /*
+             * The following code is when rooms are mannually chosen
+             * However currently all rooms are needed
+             * 
+              while (isset($_POST['room_' . $i])) {
+              $room_ids .= $_POST['room_' . $i] . ' ';
 
-            while (isset($_POST['room_' . $i])) {
-                $room_ids .= $_POST['room_' . $i] . ' ';
+              $q = $this->db->query("select * from rooms where id = '" . $_POST['room_' . $i] . " '");
+              $res = $q->row();
+              $room = new room($res->rows, $res->columns);
+              $room->room_no = $res->room_no;
+              array_push($room_arr, $room);
+              $i++;
+              }
+             * 
+             */
+            $q = $this->db->query("select * from rooms");
 
-                $q = $this->db->query("select * from rooms where id = '" . $_POST['room_' . $i] . " '");
-                $res = $q->row();
+            foreach ($q->result() as $res) {
                 $room = new room($res->rows, $res->columns);
                 $room->room_no = $res->room_no;
                 array_push($room_arr, $room);
-                $i++;
             }
 
-
             $master = array();
-
             $i = 1;
             $pg_sub_ids = '';
-            while (isset($_POST['subject_' . $i])) {
+            $max_programs = $_POST['max_programs'];
+
+            while ($i <= $max_programs) {
+
+                if (!isset($_POST['subject_' . $i])) {
+                    $i++;
+                    continue;
+                }
+
                 $pg_sub_ids .= $_POST['program_' . $i] . ':' . $_POST['subject_' . $i] . ' ';
 
                 $q = $this->db->query("select * from student_details where program_id = '" . $_POST['program_' . $i] . " '");
@@ -277,7 +307,7 @@ class Exams extends CI_Controller {
                 }
 
                 push_students($room_arr, $student_arr, $_POST['subject_' . $i], $master);
-
+                echo $_POST['subject_' . $i] . '<br />';
                 $i++;
             }
 
