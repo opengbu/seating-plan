@@ -185,9 +185,17 @@ class Exams extends CI_Controller {
         $data['master'] = unserialize($row->master);
 
         if ($this->input->get('pdf') == 1) {
-            $this->load->view('common/header_2', $data);
-            $this->load->view('Display_exam', $data);
-            $this->load->view('common/footer_2', $data);
+            ob_start();
+            define("DOMPDF_ENABLE_REMOTE", false);
+            $this->load->view('Exam_pdf', $data);
+            //  return;
+            $varun_pdf = ob_get_contents();
+            ob_end_clean();
+            $this->load->helper(array('dompdf', 'file'));
+            pdf_create($varun_pdf, 'Seating_Plan');
+            write_file('name', $data);
+        } else if ($this->input->get('print') == 1) {
+            $this->load->view('Exam_pdf', $data);
         } else {
             $this->load->view('common/header_2', $data);
             $this->load->view('Display_exam', $data);

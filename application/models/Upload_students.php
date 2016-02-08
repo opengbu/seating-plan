@@ -50,11 +50,4 @@ class Upload_students extends CI_Model {
         $data['success'] = "success";
         return $data;
     }
-
-    /* function get_car_features_info()
-      {
-      $get_cardetails=$this->db->query("select * from student_details");
-      return $get_cardetails;
-
-      } */
 }

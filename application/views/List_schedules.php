@@ -36,13 +36,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         Exam Date
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         Time
                     </div>
                     <div class="col-sm-2">
                         Shift
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <div class="pull-right">
                             View
                         </div>
@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <?php
                         echo $row->time;
                         ?>
@@ -76,10 +76,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         echo ucfirst($row->shift);
                         ?>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <div class="pull-right">
                             <?php
                             echo '<a class="btn btn-xs btn-success " href="' . base_url() . "Exams/Print_data?exam_id=$row->id" . '"></i>View</a>';
+                            ?>&nbsp;&nbsp;
+							<?php
+                            echo '<a class="btn btn-xs btn-warning " href="' . base_url() . "Exams/Print_data?exam_id=$row->id&print=1" . '"></i>Print</a>';
+                            ?>&nbsp;&nbsp;&nbsp;<?php
+                            echo '<a class="btn btn-xs btn-danger" href="' . base_url() . "Exams/Print_data?exam_id=$row->id&pdf=1" . '"></i>PDF</a>';
                             ?>
                         </div>
                     </div>

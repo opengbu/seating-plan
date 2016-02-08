@@ -101,10 +101,10 @@ class Rooms extends CI_Controller {
 	
 	/**  Created on :Nov 25, 2015, 2:24:49 AM
  *  Author     :Rishabh Ahuja <rishabhahuja279@gmail.com>*/
-	function upload_sampledata()
+	function upload_roomdata()
 		{
-		$this->load->model('upload_form');
-		$data['result']=$this->upload_form->upload_sampledata_csv();
+		$this->load->model('Upload_rooms');
+		$data['result']=$this->Upload_rooms->room_data_csv();
 		redirect(base_url() . 'Rooms/view_all');
 		
 		

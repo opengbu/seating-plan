@@ -32,6 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="list-group-item">
             <div class="row">
                 <b>
+                    
+                    <div class="col-sm-1">
+                        Program Id
+                    </div>
                     <div class="col-sm-3">
                         Program Name
                     </div>
@@ -44,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-sm-2">
                         Edit
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <div class="pull-right">
                             Delete</div>
                     </div>
@@ -59,6 +63,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
             <li class="list-group-item">
                 <div class="row">
+                    
+                    <div class="col-sm-1">
+                        <?php
+                        echo $row->id;
+                        ?>
+                    </div>
                     <div class="col-sm-3">
                         <?php
                         echo $row->program;
@@ -86,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
 
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <?php
                         if ($this->permissions->get_level() == 2 || $this->permissions->get_level() >= 4) {
                             ?>

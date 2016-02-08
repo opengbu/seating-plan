@@ -67,7 +67,7 @@ function add_prefix(&$item1, $key, $prefix) {
 
 
 
-<form action="<?=site_url('Rooms/upload_sampledata')?>" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+<form action="<?=site_url('Programs/upload_programdata')?>" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
 <table>
 <tr>
 <td> Choose your .csv file: </td>

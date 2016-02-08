@@ -8,6 +8,9 @@ if ($pdf_flag == 0) {
     ?>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <?php
+} else {
+    ?>
+    <?php
 }
 ?>
 <style>
@@ -102,9 +105,19 @@ if ($pdf_flag == 0) {
     <h2>Room Wise Plan</h2>
     <?php
     foreach ($rooms as $room) {
+	$flag = 0;
+                foreach ($master as $element) {
+                    if ($element->room_no == $room->room_no) {
+                        $flag = 1;
+                        break;
+                    }
+                }
+                if ($flag == 0)
+                    continue; //empty room
+					
         ?>
-        <div class="row text-center" style="    border: 2px solid #73AD21; border-radius: 25px 25px 0px 0px;">
-            <div style="padding-top: 5px">
+        <div class="row" style="    border: 2px solid #73AD21; border-radius: 25px 25px 0px 0px;">
+            <div class="text-center" style="padding-top: 5px">
                 <b><?= $room->room_no ?> [<?php
     foreach ($room->odd_subjects as $odd)
         echo $odd . ' ';
@@ -114,16 +127,15 @@ if ($pdf_flag == 0) {
         ?> ]</b>
             </div>
             <div class="row col-sm-12">
-                <div class="pull-right">
                     <?php
-                    echo ucfirst($exam_info->shift) . ' Shift: ' . $exam_info->time . ', ' . $exam_info->date;
+                    echo '&nbsp;&nbsp;' . ucfirst($exam_info->shift) . ' Shift: ' . $exam_info->time . ', ' . $exam_info->date;
                     ?>
-                </div><br />
+                <br />
             </div>
-            <div class="row col-sm-12">
+            <div class="row col-sm-12 text-center">
                 Board Facing Side 
             </div>
-            <table class="table table-bordered table-striped  table-responsive" style="margin-top: 5px;">
+            <table class="text-center table table-bordered table-striped  table-responsive" style="margin-top: 5px;">
 
                 <?php
                 for ($i = 1; $i <= $room->rows; $i++) {

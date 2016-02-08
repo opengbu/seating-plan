@@ -55,7 +55,7 @@ echo '<br /><label><font color="red">' . validation_errors() . '</font></label><
 
 
 
-<form action="<?=site_url('Rooms/upload_sampledata')?>" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+<form action="<?=site_url('Rooms/upload_roomdata')?>" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
 <table>
 <tr>
 <td> Choose your .csv file: </td>

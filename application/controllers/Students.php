@@ -129,28 +129,12 @@ class Students extends CI_Controller {
         redirect(base_url() . 'Students/view_all');
     }
 	
-	
-	
-	
-	
-	
-	function upload_sampledata()
-		{
-		$this->load->model('upload');
-		$data['result']=$this->upload->upload_sampledata_csv();
+	function upload_studentdata()
+	{
+		$this->load->model('Upload_students');
+		$data['result']=$this->Upload_students->student_data_csv();
 		redirect(base_url() . 'Students/view_all');
 		
-		//$data['query']=$this-> upload_services->get_car_features_info();
-
-		}
-
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 
 }
