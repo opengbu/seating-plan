@@ -199,6 +199,8 @@ class Exams extends CI_Controller {
         } else {
             $this->load->view('common/header_2', $data);
             $this->load->view('Display_exam', $data);
+            //$this->load->view('Exam_pdf', $data);
+    
             $this->load->view('common/footer_2', $data);
         }
     }

@@ -32,19 +32,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="list-group-item">
             <div class="row">
                 <b>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         Exam Date
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         Time
                     </div>
                     <div class="col-sm-2">
                         Shift
                     </div>
                     <div class="col-sm-3">
+                        View <br />(Use Chrome for Printing)
+                    </div>
+                    <div class="col-sm-3">
                         <div class="pull-right">
-                            View
+                            Search
                         </div>
                     </div>
                 </b>
@@ -56,38 +59,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $query = $this->db->query('select * from exams order by id desc');
         foreach ($query->result() as $row) {
             ?>
-            <li class="list-group-item">
+            <li class="list-group-item" style="padding: 0px;">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2" style="padding-left: 30px; padding-top: 5px;">
                         <?php
                         echo $row->date;
                         ?>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2"style="padding-left: 0px; padding-top: 5px;">
                         <?php
                         echo $row->time;
                         ?>
-
                     </div>
-                    
-                    <div class="col-sm-2">
+
+
+                    <div class="col-sm-2" style="padding-left: 20px; padding-top: 5px;">
                         <?php
                         echo ucfirst($row->shift);
                         ?>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="pull-right">
-                            <?php
-                            echo '<a class="btn btn-xs btn-success " href="' . base_url() . "Exams/Print_data?exam_id=$row->id" . '"></i>View</a>';
-                            ?>&nbsp;&nbsp;
-							<?php
-                            echo '<a class="btn btn-xs btn-warning " href="' . base_url() . "Exams/Print_data?exam_id=$row->id&print=1" . '"></i>Print</a>';
-                            ?>&nbsp;&nbsp;&nbsp;<?php
-                            echo '<a class="btn btn-xs btn-danger" href="' . base_url() . "Exams/Print_data?exam_id=$row->id&pdf=1" . '"></i>PDF</a>';
-                            ?>
-                        </div>
+
+
+                    <div class="col-sm-3" style="padding-top: 5px; padding-right: 24px;">
+                        <?php
+                        echo '<a class="btn btn-xs btn-success " href="' . base_url() . "Exams/Print_data?exam_id=$row->id" . '"></i>View</a>';
+                        ?>&nbsp;&nbsp;
+                        <?php
+                        echo '<a class="btn btn-xs btn-warning " href="' . base_url() . "Exams/Print_data?exam_id=$row->id&print=1" . '"></i>Print</a>';
+                        ?>
+                        <!--
+                        &nbsp;&nbsp;&nbsp;<?php
+                        echo '<a class="btn btn-xs btn-danger" href="' . base_url() . "Exams/Print_data?exam_id=$row->id&pdf=1" . '"></i>PDF</a>';
+                        ?>
+                        -->
                     </div>
+
+                    <div class="col-sm-3" style="">
+                        <form action="<?=base_url() . "Exams/Print_data";?>" method="get" class="form-inline">
+                            <input type="hidden" name="exam_id" value="<?=$row->id?>" />
+                            <div class="input-group pull-right">
+                                <input type="text" name="roll_no" class="form-control input-sm" placeholder="13/ICS/057">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-sm" type="submit" value="Submit">Go!</button>
+                                </span>
+                            </div><!-- /input-group -->
+
+                        </form>
+
+                    </div>
+
                 </div>
             </li>
             <?php
