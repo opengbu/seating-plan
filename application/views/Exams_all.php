@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="list-group-item">
             <div class="row">
                 <b>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         Exam Date
                     </div>
                     <div class="col-sm-2">
@@ -44,7 +44,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-sm-2">
                         Edit
                     </div>
-                    <div class="col-sm-3">
+
+                    <div class="col-sm-2">
+                        Manage Status
+                    </div>
+                    <div class="col-sm-2">
                         Print
                         <div class="pull-right">
                             Delete</div>
@@ -60,10 +64,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <?php
-                        echo $row->date;
+                        if ($row->status == 0) {
+                            $color = 'blue';
+                        } else if ($row->status == 1) {
+                            $color = 'green';
+                        }
+                        echo '<b><font color="' . $color . '">' . $row->date . '</font></b>';
                         ?>
+
                     </div>
 
                     <div class="col-sm-2">
@@ -87,7 +97,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
 
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
+                        <?php
+                        $c_string = base_url() . 'exams/update_status?exam_id=' . $row->id;
+                        $options['Default'] = 'Select';
+
+                        $options[$c_string . '&status=1'] = 'Mark as Visible';
+                        $options[$c_string . '&status=0'] = 'Mark as Hidden';
+                        unset($options[$c_string . '&status=' . $row->status]);
+
+                        echo form_dropdown('', $options, '', 'class="selectpicker" data-style="btn btn-xs" data-width="60%"'
+                                . 'onchange="if (this.value) window.location.href = this.value"');
+                        unset($options);
+                        ?>
+                    </div>
+                    <div class="col-sm-2">
                         <?php
                         echo '<a class="btn btn-xs btn-success " href="' . base_url() . "Exams/Print_data?exam_id=$row->id" . '"></i>Print</a>';
 

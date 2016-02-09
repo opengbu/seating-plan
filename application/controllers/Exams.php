@@ -200,7 +200,7 @@ class Exams extends CI_Controller {
             $this->load->view('common/header_2', $data);
             $this->load->view('Display_exam', $data);
             //$this->load->view('Exam_pdf', $data);
-    
+
             $this->load->view('common/footer_2', $data);
         }
     }
@@ -241,6 +241,13 @@ class Exams extends CI_Controller {
             die();
         }
         return 1;
+    }
+
+    function update_status() {
+        $this->secure_hard();
+        $this->db->query("update exams set status = '" . $_GET['status'] . "' where "
+                . " id = '" . $_GET['exam_id'] . "'");
+        redirect(base_url() . 'Exams/view_all');
     }
 
     function CreateOrUpdate() {

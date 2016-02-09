@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <?php
         $current_user_type = $this->session->userdata('type');
-        $query = $this->db->query('select * from exams order by id desc');
+        $query = $this->db->query('select * from exams where status = 1 order by id desc');
         foreach ($query->result() as $row) {
             ?>
             <li class="list-group-item" style="padding: 0px;">
